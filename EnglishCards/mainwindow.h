@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "card.h"
 
 namespace Ui {
 class MainWindow;
@@ -23,7 +24,10 @@ public slots:
     void onButtonVideoClicked();
 
 private:
+    void showCard();
+
     Ui::MainWindow *ui;
+    EnglishCards::Card card;
 };
 
 #endif // MAINWINDOW_H
