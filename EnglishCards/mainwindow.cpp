@@ -27,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    mediaPlayer->stop();
     delete ui;
 }
 
