@@ -11,10 +11,14 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = EnglishCards
 TEMPLATE = app
 
+CONFIG += c++11
+
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    card.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    card.h
 
 FORMS    += mainwindow.ui
