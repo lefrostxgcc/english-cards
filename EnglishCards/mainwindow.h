@@ -15,6 +15,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+    void onButtonPrevClicked();
+    void onButtonNextClicked();
+    void onButtonEnglishClicked();
+    void onButtonRussianClicked();
+    void onButtonVideoClicked();
+
 private:
     Ui::MainWindow *ui;
 };
