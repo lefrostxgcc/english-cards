@@ -34,6 +34,7 @@ private:
     EnglishCards::Card card;
     QMediaPlayer *mediaPlayer;
     QVideoWidget *video;
+    bool playingVideo{};
 };
 
 #endif // MAINWINDOW_H
