@@ -25,6 +25,7 @@ public slots:
     void onButtonRussianClicked();
     void onButtonVideoClicked();
     void onVideoStateChanged(QMediaPlayer::State state);
+    void onActionAboutProgramTriggered();
 
 private:
     void showCard();

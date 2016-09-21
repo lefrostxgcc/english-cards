@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QPixmap>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -16,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->buttonRussian,  &QPushButton::clicked,          this, &MainWindow::onButtonRussianClicked);
     connect(ui->buttonVideo,    &QPushButton::clicked,          this, &MainWindow::onButtonVideoClicked);
     connect(mediaPlayer,        &QMediaPlayer::stateChanged,    this, &MainWindow::onVideoStateChanged);
+    connect(ui->actionAbout,    &QAction::triggered,            this, &MainWindow::onActionAboutProgramTriggered);
 
     video = new QVideoWidget();
     ui->stackedPictureVideo->insertWidget(1, video);
@@ -62,6 +64,16 @@ void MainWindow::onButtonVideoClicked()
 void MainWindow::onVideoStateChanged(QMediaPlayer::State state)
 {
     ui->stackedPictureVideo->setCurrentIndex(state == QMediaPlayer::PlayingState ? 1 : 0);
+}
+
+void MainWindow::onActionAboutProgramTriggered()
+{
+    QMessageBox::about(this,
+                       "О программе",
+                       "Программа \"Английские карточки\".\n\nВыбирайте карточки с помощью боковых клавиш '<<' '>>'\n"
+                       "Верхняя и нижняя кнопки выводят звук.\n"
+                       "Для некоторых карточек доступно видео.\n\n"
+                       "Автор: Ильшат.\ne-mail: lefrostx@gmail.com\nДата: 21.09.16.");
 }
 
 void MainWindow::showCard()
