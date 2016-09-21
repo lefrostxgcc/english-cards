@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->buttonEnglish,  &QPushButton::clicked, this, &MainWindow::onButtonEnglishClicked);
     connect(ui->buttonRussian,  &QPushButton::clicked, this, &MainWindow::onButtonRussianClicked);
     connect(ui->buttonVideo,    &QPushButton::clicked, this, &MainWindow::onButtonVideoClicked);
+    mediaPlayer = new QMediaPlayer(this);
     showCard();
 }
 
@@ -35,12 +36,14 @@ void MainWindow::onButtonNextClicked()
 
 void MainWindow::onButtonEnglishClicked()
 {
-
+    mediaPlayer->setMedia(QUrl::fromLocalFile(card.englishAudio()));
+    mediaPlayer->play();
 }
 
 void MainWindow::onButtonRussianClicked()
 {
-
+    mediaPlayer->setMedia(QUrl::fromLocalFile(card.russianAudio()));
+    mediaPlayer->play();
 }
 
 void MainWindow::onButtonVideoClicked()
@@ -53,4 +56,5 @@ void MainWindow::showCard()
     ui->buttonEnglish->setText(card.english());
     ui->buttonRussian->setText(card.russian());
     ui->labelPicture->setPixmap(QPixmap(card.picture()).scaled(QSize(300, 300), Qt::KeepAspectRatio));
+    ui->buttonVideo->setVisible(card.video() != "");
 }

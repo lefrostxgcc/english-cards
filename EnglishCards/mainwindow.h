@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMediaPlayer>
 #include "card.h"
 
 namespace Ui {
@@ -28,6 +29,7 @@ private:
 
     Ui::MainWindow *ui;
     EnglishCards::Card card;
+    QMediaPlayer *mediaPlayer;
 };
 
 #endif // MAINWINDOW_H
