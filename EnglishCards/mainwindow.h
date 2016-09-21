@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QMediaPlayer>
+#include <QVideoWidget>
 #include "card.h"
 
 namespace Ui {
@@ -23,6 +24,7 @@ public slots:
     void onButtonEnglishClicked();
     void onButtonRussianClicked();
     void onButtonVideoClicked();
+    void onVideoStateChanged(QMediaPlayer::State state);
 
 private:
     void showCard();
@@ -30,6 +32,7 @@ private:
     Ui::MainWindow *ui;
     EnglishCards::Card card;
     QMediaPlayer *mediaPlayer;
+    QVideoWidget *video;
 };
 
 #endif // MAINWINDOW_H

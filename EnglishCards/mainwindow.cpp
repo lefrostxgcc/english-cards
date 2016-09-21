@@ -8,12 +8,18 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect(ui->buttonPrevCard, &QPushButton::clicked, this, &MainWindow::onButtonPrevClicked);
-    connect(ui->buttonNextCard, &QPushButton::clicked, this, &MainWindow::onButtonNextClicked);
-    connect(ui->buttonEnglish,  &QPushButton::clicked, this, &MainWindow::onButtonEnglishClicked);
-    connect(ui->buttonRussian,  &QPushButton::clicked, this, &MainWindow::onButtonRussianClicked);
-    connect(ui->buttonVideo,    &QPushButton::clicked, this, &MainWindow::onButtonVideoClicked);
     mediaPlayer = new QMediaPlayer(this);
+
+    connect(ui->buttonPrevCard, &QPushButton::clicked,          this, &MainWindow::onButtonPrevClicked);
+    connect(ui->buttonNextCard, &QPushButton::clicked,          this, &MainWindow::onButtonNextClicked);
+    connect(ui->buttonEnglish,  &QPushButton::clicked,          this, &MainWindow::onButtonEnglishClicked);
+    connect(ui->buttonRussian,  &QPushButton::clicked,          this, &MainWindow::onButtonRussianClicked);
+    connect(ui->buttonVideo,    &QPushButton::clicked,          this, &MainWindow::onButtonVideoClicked);
+    connect(mediaPlayer,        &QMediaPlayer::stateChanged,    this, &MainWindow::onVideoStateChanged);
+
+    video = new QVideoWidget();
+    ui->stackedPictureVideo->insertWidget(1, video);
+    mediaPlayer->setVideoOutput(video);
     showCard();
 }
 
@@ -48,7 +54,14 @@ void MainWindow::onButtonRussianClicked()
 
 void MainWindow::onButtonVideoClicked()
 {
+    ui->stackedPictureVideo->setCurrentIndex(1);
+    mediaPlayer->setMedia(QUrl::fromLocalFile(card.video()));
+    mediaPlayer->play();
+}
 
+void MainWindow::onVideoStateChanged(QMediaPlayer::State state)
+{
+    ui->stackedPictureVideo->setCurrentIndex(state == QMediaPlayer::PlayingState ? 1 : 0);
 }
 
 void MainWindow::showCard()
